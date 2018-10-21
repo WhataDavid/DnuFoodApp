@@ -1,8 +1,10 @@
 package cn.dnui_dx602.dnuifood16110100602.service;
 
-import android.telecom.Call;
 
 import cn.dnui_dx602.dnuifood16110100602.bean.UserBean;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface UserService {
     @GET("userLogin.do")

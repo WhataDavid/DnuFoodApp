@@ -1,6 +1,6 @@
 package cn.dnui_dx602.dnuifood16110100602.controller;
-
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import cn.dnui_dx602.dnuifood16110100602.R;
 

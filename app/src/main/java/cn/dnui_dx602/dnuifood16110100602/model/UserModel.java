@@ -1,9 +1,9 @@
 package cn.dnui_dx602.dnuifood16110100602.model;
 
-import cn.dnui_zjs008.dnuifood_iamzjs.bean.UserBean;
-import cn.dnui_zjs008.dnuifood_iamzjs.iface.UserIface;
-import cn.dnui_zjs008.dnuifood_iamzjs.listener.onRetrofitListener;
-import cn.dnui_zjs008.dnuifood_iamzjs.service.UserService;
+import cn.dnui_dx602.dnuifood16110100602.bean.UserBean;
+import cn.dnui_dx602.dnuifood16110100602.iface.UserIface;
+import cn.dnui_dx602.dnuifood16110100602.listener.onRetrofitListener;
+import cn.dnui_dx602.dnuifood16110100602.service.UserService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
