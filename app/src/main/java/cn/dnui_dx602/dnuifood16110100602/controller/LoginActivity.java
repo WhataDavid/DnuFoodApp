@@ -82,12 +82,11 @@ public class LoginActivity extends BaseActivity
                                 System.out.println(userBean.getUserid());
                                 if (userBean.getUserid().equals("0"))
                                 {
-                                    System.out.println(0);
-                                    Toast.makeText(LoginActivity.this,"失败",Toast.LENGTH_SHORT).show();
+                                    System.out.println("登录失败");
                                 }
                                 else
                                 {
-                                    System.out.println("!"+0);
+                                    System.out.println("登录成功");
                                     Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                                     startActivity(intent);
                                 }

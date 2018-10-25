@@ -20,12 +20,14 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import cn.dnui_dx602.dnuifood16110100602.R;
+import cn.dnui_dx602.dnuifood16110100602.bean.RegistBean;
 import cn.dnui_dx602.dnuifood16110100602.bean.UserBean;
 
 public class RegisterActivity extends BaseActivity {
     private EditText username, password,phone,add,comment;
     private String usernameString, passwordString,phoneString,addString,commentString;
     private Button button;
+    RegistBean registBean;
     Gson gson;
 
     @Override
@@ -53,9 +55,9 @@ public class RegisterActivity extends BaseActivity {
 //                System.out.println(usernameString+passwordString+phoneString+addString+commentString);
 
             //    http://172.24.10.175:8080/foodService/userRegister.do?username=lnn&userpass=11&mobilenum=13476543211&addr ess=大连&comment=老师
-                String tmp=new String();
-                tmp="http://172.24.10.175:8080/foodService/userRegister.do?username="+usernameString+"&userpass="+passwordString+"&mobilenum="+
-                        phoneString+"&addr ess="+addString+"&comment="+commentString;
+                String string=new String();
+                string="http://172.24.10.175:8080/foodService/userRegister.do?username="+usernameString+"&userpass="+passwordString+"&mobilenum="+
+                        phoneString+"&address="+addString+"&comment="+commentString;
                 new AsyncTask<String, Void, Void>() {
 
 
@@ -70,20 +72,18 @@ public class RegisterActivity extends BaseActivity {
                             String line;
                             while ((line = bufferedReader.readLine()) != null) {
                                 System.out.println(line + "123");
-//                                gson = new Gson();
-//                                userBean = gson.fromJson(line, UserBean.class);
-//                                System.out.println(userBean.getUserid());
-//                                if (userBean.getUserid().equals("0"))
-//                                {
-//                                    System.out.println(0);
-//                                    Toast.makeText(LoginActivity.this,"失败",Toast.LENGTH_SHORT).show();
-//                                }
-//                                else
-//                                {
-//                                    System.out.println("!"+0);
-//                                    Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-//                                    startActivity(intent);
-//                                }
+                                gson = new Gson();
+                                registBean = gson.fromJson(line, RegistBean.class);
+
+                                System.out.println(registBean.getSuccess());
+                                if (registBean.getSuccess().equals("0"))
+                                {
+                                    System.out.println("注册失败");
+                                }
+                                else
+                                {
+                                    System.out.println("注册成功");
+                                }
 
 
                                 bufferedReader.close();
@@ -99,7 +99,7 @@ public class RegisterActivity extends BaseActivity {
                         return null;
                     }
 //                    "http://172.24.10.175:8080/foodService/userLogin.do?username=16110100602&userpass=11"
-                }.execute(tmp);
+                }.execute(string);
 
             }
         });
