@@ -87,7 +87,7 @@ public class LoginActivity extends BaseActivity
                                 else
                                 {
                                     System.out.println("登录成功");
-                                    Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, BottomNavActivity.class);
                                     startActivity(intent);
                                 }
 
@@ -96,6 +96,7 @@ public class LoginActivity extends BaseActivity
                                 inputStreamReader.close();
                                 inputStream.close();
                             }
+
 
                         } catch (MalformedURLException e) {
 
