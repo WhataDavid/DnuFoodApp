@@ -1,5 +1,6 @@
 package cn.dnui_dx602.dnuifood16110100602.controller;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -18,35 +19,42 @@ import cn.dnui_dx602.dnuifood16110100602.fragments.Fragment4;
 public class BottomNavActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+
+
+        @SuppressLint("ResourceType")
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             fragmentManager = getSupportFragmentManager();
             transaction = fragmentManager.beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     transaction.replace(R.id.content,new Fragment1());
                     transaction.commit();
                     return true;
                 case R.id.navigation_dashboard:
+                  transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     transaction.replace(R.id.content,new Fragment2());
                     transaction.commit();
                     return true;
                 case R.id.navigation_notifications:
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                     transaction.replace(R.id.content,new Fragment3());
                     transaction.commit();
                     return true;
                 case R.id.navigation_four:
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                     transaction.replace(R.id.content,new Fragment4());
                     transaction.commit();
                     return true;
             }
+
+
             return false;
         }
-
     };
 
     @Override
@@ -54,9 +62,9 @@ public class BottomNavActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottom_nav);
         setDefaultFragment();
-        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
     }
 
     private FragmentTransaction transaction;

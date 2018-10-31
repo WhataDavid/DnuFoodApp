@@ -89,6 +89,9 @@ public class LoginActivity extends BaseActivity
                                     System.out.println("登录成功");
                                     Intent intent = new Intent(LoginActivity.this, BottomNavActivity.class);
                                     startActivity(intent);
+                                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
                                 }
 
 
@@ -116,6 +119,8 @@ public class LoginActivity extends BaseActivity
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }
