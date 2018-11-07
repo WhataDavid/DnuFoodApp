@@ -1,8 +1,12 @@
 package cn.dnui_dx602.dnuifood16110100602.controller;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -27,10 +32,11 @@ public class LoginActivity extends BaseActivity
         implements onRetrofitListener<UserBean>, View.OnClickListener {
     private UserModel model;
     private Button btn_login,btn_regist;
-    private EditText usernameEditText, userpassEditText;
-    UserBean userBean=new UserBean();
+    public EditText usernameEditText, userpassEditText;
+     UserBean userBean=new UserBean();
     Gson gson;
-    String usernameString, userpassString, tmp;
+    String usernameString, userpassString;
+    public static String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +72,7 @@ public class LoginActivity extends BaseActivity
                 new AsyncTask<String, Void, Void>() {
 
 
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     protected Void doInBackground(String... strings) {
                         try {
@@ -80,6 +87,7 @@ public class LoginActivity extends BaseActivity
                                 gson = new Gson();
                                 userBean = gson.fromJson(line, UserBean.class);
                                 System.out.println(userBean.getUserid());
+                                user_id=userBean.getUserid();
                                 if (userBean.getUserid().equals("0"))
                                 {
                                     System.out.println("登录失败");
@@ -91,7 +99,6 @@ public class LoginActivity extends BaseActivity
                                     startActivity(intent);
                                     overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
                                 }
 
 

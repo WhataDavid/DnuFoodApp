@@ -1,13 +1,10 @@
 package cn.dnui_dx602.dnuifood16110100602.controller;
 
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -21,7 +18,6 @@ import java.net.URLConnection;
 
 import cn.dnui_dx602.dnuifood16110100602.R;
 import cn.dnui_dx602.dnuifood16110100602.bean.RegistBean;
-import cn.dnui_dx602.dnuifood16110100602.bean.UserBean;
 
 public class RegisterActivity extends BaseActivity {
     private EditText username, password,phone,add,comment;
@@ -36,7 +32,7 @@ public class RegisterActivity extends BaseActivity {
         button=findViewById(R.id.button);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        phone = findViewById(R.id.phone);
+        phone = findViewById(R.id.mobiletext);
         add = findViewById(R.id.add);
         comment = findViewById(R.id.comment);
     }
