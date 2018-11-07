@@ -36,7 +36,7 @@ public class LoginActivity extends BaseActivity
      UserBean userBean=new UserBean();
     Gson gson;
     String usernameString, userpassString;
-    public static String user_id;
+    public static String user_id,user_pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +68,36 @@ public class LoginActivity extends BaseActivity
 
                 usernameString = usernameEditText.getText().toString();
                 userpassString = userpassEditText.getText().toString();
+                user_pass=usernameString;
                 String string = "http://172.24.10.175:8080/foodService/userLogin.do?username=" + usernameString + "&userpass=" + userpassString;
                 new AsyncTask<String, Void, Void>() {
 
 
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+                        if (userBean.getUserid().equals("0"))
+                        {
+                            System.out.println("登录失败");
+                            Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            System.out.println("登录成功");
+                            Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, BottomNavActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        }
+
+                    }
+
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     protected Void doInBackground(String... strings) {
+
+
                         try {
                             URL url = new URL(strings[0]);
                             URLConnection connection = url.openConnection();
@@ -88,18 +111,7 @@ public class LoginActivity extends BaseActivity
                                 userBean = gson.fromJson(line, UserBean.class);
                                 System.out.println(userBean.getUserid());
                                 user_id=userBean.getUserid();
-                                if (userBean.getUserid().equals("0"))
-                                {
-                                    System.out.println("登录失败");
-                                }
-                                else
-                                {
-                                    System.out.println("登录成功");
-                                    Intent intent = new Intent(LoginActivity.this, BottomNavActivity.class);
-                                    startActivity(intent);
-                                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                }
+
 
 
                                 bufferedReader.close();

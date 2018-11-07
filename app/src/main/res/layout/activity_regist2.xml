@@ -63,7 +63,6 @@
         android:ems="10"
         android:hint="请输入"
         android:inputType="textPersonName"
-        android:text="username"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView2"

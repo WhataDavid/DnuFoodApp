@@ -43,27 +43,39 @@ public class Fragment4 extends Fragment {
     @Override
     public void onStart() {
         initViews();
-        while (true)
-        {
-            if (success==true)
-            {
-                initDatas();
-                break;
-            }
-        }
+//        while (true)
+//        {
+//            if (success==true)
+//            {
+//                initDatas();
+//                break;
+//            }
+//        }
         initEvents();
 
         super.onStart();
     }
 
-    @SuppressLint("StaticFieldLeak")
     private void initViews() {
         String string="http://172.24.10.175:8080/foodService/getUserById.do?user_id="+ LoginActivity.user_id;
         AsyncTask<String, Void, Void> execute = new AsyncTask<String, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                update = getActivity().findViewById(R.id.update);
+            }
 
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                initDatas();
+            }
 
             @Override
             protected Void doInBackground(String... strings) {
+
+
+
                 try {
                     URL url = new URL(strings[0]);
                     URLConnection connection = url.openConnection();
@@ -107,7 +119,14 @@ public class Fragment4 extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),UpdateUserById.class).putExtra("username",getUserBean.getUsername()));
+                Intent intent=new Intent(getActivity(),UpdateUserById.class);
+                intent.putExtra("username",getUserBean.getUsername());
+                intent.putExtra("userid",getUserBean.getUser_id());
+                intent.putExtra("mobile",getUserBean.getMobilenum());
+                intent.putExtra("address",getUserBean.getAddress());
+                intent.putExtra("password",LoginActivity.user_pass);
+
+                startActivity(intent);
             }
         });
     }
@@ -117,7 +136,7 @@ public class Fragment4 extends Fragment {
         mobileNum = getActivity().findViewById(R.id.mobilenum);
         address = getActivity().findViewById(R.id.address);
         userid = getActivity().findViewById(R.id.userid);
-        update = getActivity().findViewById(R.id.update);
+//        update = getActivity().findViewById(R.id.update);
 
         System.out.println(getUserBean.getUser_id()+"8888");
         userid.setText(getUserBean.getUser_id()+" ");
