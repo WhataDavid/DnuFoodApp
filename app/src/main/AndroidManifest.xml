@@ -25,7 +25,8 @@
         <activity
             android:name=".controller.BottomNavActivity"
             android:label="@string/title_activity_bottom_nav" />
-        <activity android:name=".controller.UpdateUserById"></activity>
+        <activity android:name=".controller.UpdateUserById" />
+        <activity android:name=".controller.GetFoodByShopActivity"></activity>
     </application>
 
 </manifest>
