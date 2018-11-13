@@ -1,0 +1,84 @@
+package cn.dnui_dx602.dnuifood16110100602.adapter;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
+import cn.dnui_dx602.dnuifood16110100602.R;
+import cn.dnui_dx602.dnuifood16110100602.bean.FoodBean;
+import cn.dnui_dx602.dnuifood16110100602.bean.ShopBean;
+import cn.dnui_dx602.dnuifood16110100602.controller.GetFoodByShopActivity;
+
+public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
+    private List<FoodBean> mDataList;
+    public static int Foodid;
+
+    public FoodAdapter(Context mContext, List mDataList){
+        this.mDataList=mDataList;
+    }
+    @NonNull
+    @Override
+    public FoodAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new ViewHolder(View.inflate(viewGroup.getContext(),R.layout.food_item,null));
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull FoodAdapter.ViewHolder  holder, int i) {
+        final FoodBean entity=(FoodBean)mDataList.get(i);
+        if(null==entity)
+            return;
+        ViewHolder viewHolder=(ViewHolder) holder;
+        viewHolder.foodname.setText(entity.getFoodname());
+        viewHolder.intro.setText(entity.getIntro());
+        viewHolder.price.setText(entity.getPrice());
+
+        String url = "http://172.24.10.175:8080/foodService/" + entity.getPic();
+        Picasso.get().load(url).into(viewHolder.image);
+
+        viewHolder.itemView
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //显示店铺详情
+                        Foodid=entity.getFood_id();
+                        Intent intent = new Intent(v.getContext(), GetFoodByShopActivity.class);
+                                intent.putExtra("foodid",entity.getFood_id());
+                        System.out.println("foodid="+entity.getFood_id());
+
+                        v.getContext().startActivity(intent);
+
+                    }
+                });
+    }
+
+    @Override
+    public int getItemCount() {
+        return mDataList.size();
+    }
+
+    public class ViewHolder extends  RecyclerView.ViewHolder{
+
+        TextView foodname,intro,price;
+        ImageView image;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            foodname= itemView.findViewById(R.id.foodname);
+            intro= itemView.findViewById(R.id.intro);
+            image=itemView.findViewById(R.id.res_image);
+            price= itemView.findViewById(R.id.price);
+        }
+    }
+}

@@ -2,6 +2,7 @@ package cn.dnui_dx602.dnuifood16110100602.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,8 @@ import cn.dnui_dx602.dnuifood16110100602.controller.GetFoodByShopActivity;
 
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
     private List<ShopBean> mDataList;
+    public static int Shopid;
+
     public ShopAdapter(Context mContext,List mDataList){
         this.mDataList=mDataList;
     }
@@ -48,11 +51,19 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        SharedPreferences sharedPreferences;
+                        sharedPreferences=v.getContext().getSharedPreferences("INFOR", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor=sharedPreferences.edit();
+                        editor.putString("shopname",entity.getShopname());
+                        editor.putString("phonenum",entity.getPhonenum());
+                        editor.putString("intro",entity.getIntro());
+                        editor.putString("pic",entity.getPic());
 
-                        //显示文章详情
-                        Intent intent = new Intent(v.getContext(), GetFoodByShopActivity.class).putExtra("id",entity.getShop_id());
-//                        Toast.makeText(v.getContext(), entity.getShop_id(), Toast.LENGTH_SHORT).show();
-                        System.out.println("shopid="+entity.getShop_id());
+                        editor.commit();
+                        //显示店铺详情
+                        Shopid=entity.getShop_id();
+                        Intent intent = new Intent(v.getContext(), GetFoodByShopActivity.class);
+                        System.out.println("shopid="+entity.getShopname());
                         v.getContext().startActivity(intent);
 
                     }

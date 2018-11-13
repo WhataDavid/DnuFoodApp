@@ -80,11 +80,13 @@ public class LoginActivity extends BaseActivity
                         {
                             System.out.println("登录失败");
                             Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+
                         }
                         else
                         {
                             System.out.println("登录成功");
                             Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            System.out.println(user_pass);
                             Intent intent = new Intent(LoginActivity.this, BottomNavActivity.class);
                             startActivity(intent);
                             overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
@@ -111,7 +113,7 @@ public class LoginActivity extends BaseActivity
                                 userBean = gson.fromJson(line, UserBean.class);
                                 System.out.println(userBean.getUserid());
                                 user_id=userBean.getUserid();
-
+                                user_pass=userpassString;
 
 
                                 bufferedReader.close();

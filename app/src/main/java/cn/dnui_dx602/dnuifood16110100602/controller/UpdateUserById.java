@@ -27,7 +27,7 @@ import cn.dnui_dx602.dnuifood16110100602.bean.RegistBean;
 public class UpdateUserById extends BaseActivity {
 
     String usernameString, passwordString, mobileString, addressString;
-    EditText username, password, phone, address;
+    EditText username, password, phone, address,originalPass;
     Button button;
     Gson gson;
     RegistBean registBean;
@@ -41,6 +41,7 @@ public class UpdateUserById extends BaseActivity {
         phone = findViewById(R.id.mobiletext);
         address = findViewById(R.id.add);
         button= findViewById(R.id.button);
+        originalPass=findViewById(R.id.originalPass);
 
         Intent intent = getIntent();
         usernameString = intent.getStringExtra("username");
@@ -61,64 +62,71 @@ public class UpdateUserById extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                usernameString=username.getText().toString();
+                if (LoginActivity.user_pass.equals(originalPass.getText()))
+                {
+                    usernameString=username.getText().toString();
 //                passwordString=password.getText().toString();
-                mobileString=phone.getText().toString();
-                addressString=address.getText().toString();
-                LoginActivity.user_pass=passwordString;
-                String string2 = "http://172.24.10.175:8080/foodService/updateUserById.do?user_id="+LoginActivity.user_id+"&username=" + usernameString + "&userpass=" + passwordString + "&mobilenum=" +
-                        mobileString + "&address=" + addressString;
-                new AsyncTask<String, Void, Void>() {
-                    @Override
-                    protected void onPostExecute(Void aVoid) {
-                        super.onPostExecute(aVoid);
-                        if (success==true)
-                        {
-                            Toast.makeText(UpdateUserById.this, "修改成功", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(UpdateUserById.this, "修改失败", Toast.LENGTH_SHORT).show();
-                        }
-            
-                    }
-
-                    @Override
-                    protected Void doInBackground(String... strings) {
-                        try {
-                            URL url = new URL(strings[0]);
-                            URLConnection connection = url.openConnection();
-                            InputStream inputStream = connection.getInputStream();
-                            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
-                            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                            String line;
-                            while ((line = bufferedReader.readLine()) != null) {
-                                System.out.println(line + "123");
-                                gson = new Gson();
-                                registBean = gson.fromJson(line, RegistBean.class);
-
-                                System.out.println(registBean.getSuccess());
-                                if (registBean.getSuccess().equals("0")) {
-                                    System.out.println("修改失败");
-                                    success=false;
-                                } else {
-                                    System.out.println("修改成功");
-                                    success=true;
-                                }
-
-
-                                bufferedReader.close();
-                                inputStreamReader.close();
-                                inputStream.close();
+                    mobileString=phone.getText().toString();
+                    addressString=address.getText().toString();
+                    LoginActivity.user_pass=passwordString;
+                    String string2 = "http://172.24.10.175:8080/foodService/updateUserById.do?user_id="+LoginActivity.user_id+"&username=" + usernameString + "&userpass=" + passwordString + "&mobilenum=" +
+                            mobileString + "&address=" + addressString;
+                    new AsyncTask<String, Void, Void>() {
+                        @Override
+                        protected void onPostExecute(Void aVoid) {
+                            super.onPostExecute(aVoid);
+                            if (success==true)
+                            {
+                                Toast.makeText(UpdateUserById.this, "修改成功", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(UpdateUserById.this, "修改失败", Toast.LENGTH_SHORT).show();
                             }
 
-                        } catch (MalformedURLException e) {
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
                         }
-                        return null;
-                    }
-                }.execute(string2);
+
+                        @Override
+                        protected Void doInBackground(String... strings) {
+                            try {
+                                URL url = new URL(strings[0]);
+                                URLConnection connection = url.openConnection();
+                                InputStream inputStream = connection.getInputStream();
+                                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+                                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                                String line;
+                                while ((line = bufferedReader.readLine()) != null) {
+                                    System.out.println(line + "123");
+                                    gson = new Gson();
+                                    registBean = gson.fromJson(line, RegistBean.class);
+
+                                    System.out.println(registBean.getSuccess());
+                                    if (registBean.getSuccess().equals("0")) {
+                                        System.out.println("修改失败");
+                                        success=false;
+                                    } else {
+                                        System.out.println("修改成功");
+                                        success=true;
+                                    }
+
+
+                                    bufferedReader.close();
+                                    inputStreamReader.close();
+                                    inputStream.close();
+                                }
+
+                            } catch (MalformedURLException e) {
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(string2);
+                }
+                else {
+                    Toast.makeText(UpdateUserById.this, "原始密码错误", Toast.LENGTH_SHORT).show();
+                }
+                
 
 
 

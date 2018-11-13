@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -58,7 +59,24 @@ public class RegisterActivity extends BaseActivity {
 
 
                     @Override
+                    protected void onPostExecute(Void aVoid) {
+                        if (registBean.getSuccess().equals("0"))
+                        {
+                            Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                            System.out.println("注册失败");
+                        }
+                        else
+                        {
+                            Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                            System.out.println("注册成功");
+                        }
+                        super.onPostExecute(aVoid);
+                    }
+
+                    @Override
                     protected Void doInBackground(String... strings) {
+                        
+                        
                         try {
                             URL url = new URL(strings[0]);
                             URLConnection connection = url.openConnection();
@@ -72,14 +90,7 @@ public class RegisterActivity extends BaseActivity {
                                 registBean = gson.fromJson(line, RegistBean.class);
 
                                 System.out.println(registBean.getSuccess());
-                                if (registBean.getSuccess().equals("0"))
-                                {
-                                    System.out.println("注册失败");
-                                }
-                                else
-                                {
-                                    System.out.println("注册成功");
-                                }
+                                
 
 
                                 bufferedReader.close();
