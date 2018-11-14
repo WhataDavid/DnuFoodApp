@@ -13,20 +13,20 @@ public class FoodBean {
      * recommand : 1
      */
 
-    private int food_id;
+    private String food_id;
     private String foodname;
     private String intro;
     private String pic;
-    private int price;
-    private int shop_id;
-    private int type_id;
-    private int recommand;
+    private String price;
+    private String shop_id;
+    private String type_id;
+    private String recommand;
 
-    public int getFood_id() {
+    public String getFood_id() {
         return food_id;
     }
 
-    public void setFood_id(int food_id) {
+    public void setFood_id(String food_id) {
         this.food_id = food_id;
     }
 
@@ -54,35 +54,49 @@ public class FoodBean {
         this.pic = pic;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public int getShop_id() {
+    public String getShop_id() {
         return shop_id;
     }
 
-    public void setShop_id(int shop_id) {
+    public void setShop_id(String shop_id) {
         this.shop_id = shop_id;
     }
 
-    public int getType_id() {
+    public String getType_id() {
         return type_id;
     }
 
-    public void setType_id(int type_id) {
+    public void setType_id(String type_id) {
         this.type_id = type_id;
     }
 
-    public int getRecommand() {
+    public String getRecommand() {
         return recommand;
     }
 
-    public void setRecommand(int recommand) {
+    public void setRecommand(String recommand) {
         this.recommand = recommand;
+    }
+
+    @Override
+    public String toString() {
+        return "FoodBean{" +
+                "food_id='" + food_id + '\'' +
+                ", foodname='" + foodname + '\'' +
+                ", intro='" + intro + '\'' +
+                ", pic='" + pic + '\'' +
+                ", price='" + price + '\'' +
+                ", shop_id='" + shop_id + '\'' +
+                ", type_id='" + type_id + '\'' +
+                ", recommand='" + recommand + '\'' +
+                '}';
     }
 }

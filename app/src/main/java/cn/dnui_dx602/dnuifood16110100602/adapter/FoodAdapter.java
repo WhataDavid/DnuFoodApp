@@ -24,7 +24,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     private List<FoodBean> mDataList;
     public static int Foodid;
 
-    public FoodAdapter(Context mContext, List mDataList){
+    public FoodAdapter(List mDataList){
         this.mDataList=mDataList;
     }
     @NonNull
@@ -40,8 +40,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             return;
         ViewHolder viewHolder=(ViewHolder) holder;
         viewHolder.foodname.setText(entity.getFoodname());
+        System.out.println("FoodName====="+entity.getFoodname());
+        System.out.println("Intro====="+entity.getIntro());
+        System.out.println("Price====="+entity.getPrice());
         viewHolder.intro.setText(entity.getIntro());
-        viewHolder.price.setText(entity.getPrice());
+        viewHolder.price.setText(String.valueOf(entity.getPrice()));
 
         String url = "http://172.24.10.175:8080/foodService/" + entity.getPic();
         Picasso.get().load(url).into(viewHolder.image);
@@ -52,10 +55,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                     public void onClick(View v) {
 
                         //显示店铺详情
-                        Foodid=entity.getFood_id();
+                        Foodid=Integer.parseInt(entity.getFood_id());
                         Intent intent = new Intent(v.getContext(), GetFoodByShopActivity.class);
                                 intent.putExtra("foodid",entity.getFood_id());
-                        System.out.println("foodid="+entity.getFood_id());
 
                         v.getContext().startActivity(intent);
 

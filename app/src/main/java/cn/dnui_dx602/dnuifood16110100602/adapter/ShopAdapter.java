@@ -58,6 +58,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
                         editor.putString("phonenum",entity.getPhonenum());
                         editor.putString("intro",entity.getIntro());
                         editor.putString("pic",entity.getPic());
+                        editor.putString("shopid", String.valueOf(entity.getShop_id()));
 
                         editor.commit();
                         //显示店铺详情

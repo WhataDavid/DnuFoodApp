@@ -74,7 +74,7 @@ public class Fragment1 extends Fragment {
                     BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                     String line;
                     while ((line = bufferedReader.readLine()) != null) {
-                        System.out.println("返回信息"+line );
+                        System.out.println("店铺返回信息"+line );
                         shopsList = new Gson().fromJson(line, new TypeToken<List<ShopBean>>(){}.getType());
 
                         bufferedReader.close();
