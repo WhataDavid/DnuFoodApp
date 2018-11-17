@@ -18,7 +18,7 @@ public class ShopBean {
     private String address;
     private String phonenum;
     private String intro;
-    private String pic;
+    private String pic="http://172.24.10.175:8080/foodService/images/shop/chuaicai.jpg";
     private Object comment;
     private int level;
 

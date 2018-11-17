@@ -1,7 +1,6 @@
 package cn.dnui_dx602.dnuifood16110100602.fragments;
 
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -134,7 +133,7 @@ public class Fragment4 extends Fragment {
     private void initDatas() {
         userName = getView().findViewById(R.id.username);
         mobileNum = getActivity().findViewById(R.id.mobilenum);
-        address = getActivity().findViewById(R.id.address);
+        address = getActivity().findViewById(R.id.dialog_address);
         userid = getActivity().findViewById(R.id.userid);
 //        update = getActivity().findViewById(R.id.update);
 

@@ -43,10 +43,10 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         viewHolder.res_name.setText(entity.getShopname());
         viewHolder.res_address.setText(entity.getAddress());
         viewHolder.res_bar.setRating(entity.getLevel());
-
+        viewHolder.res_intro.setText(entity.getIntro());
         String url = "http://172.24.10.175:8080/foodService/" + entity.getPic();
         Picasso.get().load(url).into(viewHolder.image);
-
+//        http://172.24.10.175:8080/foodService/images/shop/chuaicai.jpg
         viewHolder.itemView
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -58,6 +58,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
                         editor.putString("phonenum",entity.getPhonenum());
                         editor.putString("intro",entity.getIntro());
                         editor.putString("pic",entity.getPic());
+                        editor.putString("address",entity.getAddress());
+                        editor.putString("level", String.valueOf(entity.getLevel()));
                         editor.putString("shopid", String.valueOf(entity.getShop_id()));
 
                         editor.commit();
@@ -79,7 +81,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
     public class ViewHolder extends  RecyclerView.ViewHolder{
 
         RatingBar res_bar;
-        TextView res_name,res_address;
+        TextView res_name,res_address,res_intro;
         ImageView image;
 
         public ViewHolder(@NonNull View itemView) {
@@ -88,6 +90,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
             res_bar= itemView.findViewById(R.id.ratingBar1);
             image=itemView.findViewById(R.id.res_image);
             res_address= itemView.findViewById(R.id.res_address);
+            res_intro=itemView.findViewById(R.id.intro);
         }
     }
 }

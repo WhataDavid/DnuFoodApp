@@ -1,19 +1,17 @@
 package cn.dnui_dx602.dnuifood16110100602.controller;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
@@ -29,16 +27,16 @@ import java.util.List;
 
 import cn.dnui_dx602.dnuifood16110100602.R;
 import cn.dnui_dx602.dnuifood16110100602.adapter.FoodAdapter;
-import cn.dnui_dx602.dnuifood16110100602.adapter.ShopAdapter;
 import cn.dnui_dx602.dnuifood16110100602.bean.FoodBean;
-import cn.dnui_dx602.dnuifood16110100602.bean.ShopBean;
 
 public class GetFoodByShopActivity extends BaseActivity {
     SharedPreferences sharedPreferences;
-    private TextView shopname,phonenum,intro;
-    ImageView imageView;
+    private TextView shopname,phonenum,intro,detail,dialog_shopname,dialog_phonenum,dialog_address,dialog_intro;
+    RatingBar dialog_ratingBar;
+    ImageView imageView,dialog_imageView;
     RecyclerView recyclerView;
-    String shopnameString,phonenumString,picString,introString,shopidString;
+    String shopnameString,phonenumString,picString,introString,shopidString,levelString,addressString;
+
     @Override
     void initViews() {
         setLayout(R.layout.activity_get_food_by_shop);
@@ -47,11 +45,43 @@ public class GetFoodByShopActivity extends BaseActivity {
         imageView=findViewById(R.id.image);
 //        intro=findViewById(R.id.intro);
         recyclerView=findViewById(R.id.food_list);
+        detail=findViewById(R.id.detail);
+
+
+
+
+
     }
 
     @Override
     void initEvents() {
+        detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(GetFoodByShopActivity.this);
+                final AlertDialog dialog = builder.create();
+                View dialogView = View.inflate(GetFoodByShopActivity.this, R.layout.dialog_detail, null);
+                //设置对话框布局
+                dialog.setView(dialogView);
+                dialog_shopname=dialogView.findViewById(R.id.dialog_addressView);
+                dialog_address=dialogView.findViewById(R.id.dialog_address);
+                dialog_imageView=dialogView.findViewById(R.id.dialog_imageView);
+                dialog_intro=dialogView.findViewById(R.id.dialog_introView);
+                dialog_phonenum=dialogView.findViewById(R.id.dialog_phonenumView);
+                dialog_ratingBar=dialogView.findViewById(R.id.dialog_ratingBar);
 
+                dialog_shopname.setText(shopnameString);
+//                dialog_address.setText(addressString);
+                dialog_intro.setText(introString);
+                dialog_phonenum.setText(phonenumString);
+                dialog_ratingBar.setNumStars(Integer.parseInt(levelString));
+                String url = "http://172.24.10.175:8080/foodService/" + picString;
+                Picasso.get().load(url).into(dialog_imageView);
+                dialog.show();
+
+
+            }
+        });
     }
 
     @Override
@@ -59,10 +89,12 @@ public class GetFoodByShopActivity extends BaseActivity {
         sharedPreferences=getSharedPreferences("INFOR", Context.MODE_PRIVATE);
          shopnameString = sharedPreferences.getString("shopname","");
          phonenumString = sharedPreferences.getString("phonenum","");
-//        String introString = sharedPreferences.getString("intro","");
+         introString = sharedPreferences.getString("intro","");
          picString = sharedPreferences.getString("pic","");
          shopidString = sharedPreferences.getString("shopid","");
-
+         levelString = sharedPreferences.getString("level","");
+        addressString=sharedPreferences.getString("address","");
+        System.out.println("Address:--------------------------"+addressString);
         shopname.setText(shopnameString);
         phonenum.setText("订餐电话："+phonenumString);
 //        intro.setText(introString);

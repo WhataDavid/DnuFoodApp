@@ -44,25 +44,35 @@
 
                     <TextView
                         android:id="@+id/foodname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="113dp"
+                        android:layout_height="30dp"
                         android:layout_marginEnd="168dp"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginRight="168dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
+                        android:gravity="center"
+
                         android:text="foodname"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="60dp"
-                        android:layout_marginRight="60dp"
-                        android:layout_marginTop="40dp"
+                        android:layout_width="66dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginTop="32dp"
+                        android:gravity="center"
                         android:text="price"
-                        android:textSize="18sp"
+                        android:textColor="@color/colorAccent"
+                        android:textColorLink="@color/colorAccent"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,10 +82,12 @@
                         android:layout_height="20dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="28dp"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_horizontal"
+
                         android:text="评论"
                         app:layout_constraintEnd_toEndOf="@+id/foodname"
-                        app:layout_constraintHorizontal_bias="0.134"
+                        app:layout_constraintHorizontal_bias="0.444"
                         app:layout_constraintStart_toStartOf="@+id/foodname"
                         app:layout_constraintTop_toBottomOf="@+id/foodname" />
                 </android.support.constraint.ConstraintLayout>
