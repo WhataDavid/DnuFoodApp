@@ -18,6 +18,7 @@ import java.util.List;
 import cn.dnui_dx602.dnuifood16110100602.R;
 import cn.dnui_dx602.dnuifood16110100602.bean.FoodBean;
 import cn.dnui_dx602.dnuifood16110100602.bean.ShopBean;
+import cn.dnui_dx602.dnuifood16110100602.controller.FoodDetailActivity;
 import cn.dnui_dx602.dnuifood16110100602.controller.GetFoodByShopActivity;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
@@ -56,7 +57,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
                         //显示店铺详情
                         Foodid=Integer.parseInt(entity.getFood_id());
-                        Intent intent = new Intent(v.getContext(), GetFoodByShopActivity.class);
+                        Intent intent = new Intent(v.getContext(), FoodDetailActivity.class);
                                 intent.putExtra("foodid",entity.getFood_id());
 
                         v.getContext().startActivity(intent);

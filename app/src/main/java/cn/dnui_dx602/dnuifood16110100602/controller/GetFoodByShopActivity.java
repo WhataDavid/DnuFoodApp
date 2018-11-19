@@ -7,7 +7,10 @@ import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -61,17 +64,21 @@ public class GetFoodByShopActivity extends BaseActivity {
                 AlertDialog.Builder builder=new AlertDialog.Builder(GetFoodByShopActivity.this);
                 final AlertDialog dialog = builder.create();
                 View dialogView = View.inflate(GetFoodByShopActivity.this, R.layout.dialog_detail, null);
+
+
+
                 //设置对话框布局
                 dialog.setView(dialogView);
-                dialog_shopname=dialogView.findViewById(R.id.dialog_addressView);
-                dialog_address=dialogView.findViewById(R.id.dialog_address);
+
+                dialog_shopname=dialogView.findViewById(R.id.dialog_shopnameView2);
+                dialog_address=dialogView.findViewById(R.id.dialog_addressView);
                 dialog_imageView=dialogView.findViewById(R.id.dialog_imageView);
                 dialog_intro=dialogView.findViewById(R.id.dialog_introView);
                 dialog_phonenum=dialogView.findViewById(R.id.dialog_phonenumView);
                 dialog_ratingBar=dialogView.findViewById(R.id.dialog_ratingBar);
 
                 dialog_shopname.setText(shopnameString);
-//                dialog_address.setText(addressString);
+                dialog_address.setText(addressString);
                 dialog_intro.setText(introString);
                 dialog_phonenum.setText(phonenumString);
                 dialog_ratingBar.setNumStars(Integer.parseInt(levelString));
