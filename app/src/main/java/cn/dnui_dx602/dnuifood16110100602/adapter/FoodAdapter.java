@@ -55,10 +55,19 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                     @Override
                     public void onClick(View v) {
 
-                        //显示店铺详情
+                        //显示菜谱详情
                         Foodid=Integer.parseInt(entity.getFood_id());
                         Intent intent = new Intent(v.getContext(), FoodDetailActivity.class);
-                                intent.putExtra("foodid",entity.getFood_id());
+                        SharedPreferences sharedPreferences;
+                        sharedPreferences=v.getContext().getSharedPreferences("food", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor=sharedPreferences.edit();
+                        editor.putString("foodname",entity.getFoodname());
+                        editor.putString("intro",entity.getIntro());
+                        editor.putString("pic",entity.getPic());
+                        editor.putString("price",entity.getPrice());
+                        editor.putString("level",entity.getRecommand());
+
+                        editor.commit();
 
                         v.getContext().startActivity(intent);
 

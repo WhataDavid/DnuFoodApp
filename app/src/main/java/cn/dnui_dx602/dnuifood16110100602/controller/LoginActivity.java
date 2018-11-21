@@ -28,7 +28,7 @@ import cn.dnui_dx602.dnuifood16110100602.bean.UserBean;
 import cn.dnui_dx602.dnuifood16110100602.listener.onRetrofitListener;
 import cn.dnui_dx602.dnuifood16110100602.model.UserModel;
 
-public class LoginActivity extends BaseActivity
+public class  LoginActivity extends BaseActivity
         implements onRetrofitListener<UserBean>, View.OnClickListener {
     private UserModel model;
     private Button btn_login,btn_regist;

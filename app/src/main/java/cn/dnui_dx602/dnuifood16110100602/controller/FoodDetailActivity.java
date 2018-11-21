@@ -13,7 +13,7 @@ import cn.dnui_dx602.dnuifood16110100602.R;
 import cn.dnui_dx602.dnuifood16110100602.adapter.MyPagerAdapter;
 
 public class FoodDetailActivity extends BaseActivity {
-TextView textView;
+TextView textView,view_one_textview;
     private ViewPager viewpager_one;
     private ArrayList<View> aList;
     private MyPagerAdapter mAdapter;
@@ -21,15 +21,14 @@ TextView textView;
     @Override
     void initViews() {
         setContentView(R.layout.activity_food_detail);
-        textView=findViewById(R.id.duxu);
-        textView.setText(getIntent().getStringExtra("foodid"));
+//        textView=findViewById(R.id.duxu);
+//        textView.setText(getIntent().getStringExtra("foodid"));
 //        viewpager
         viewpager_one = (ViewPager) findViewById(R.id.viewpager);
         aList = new ArrayList<View>();
         LayoutInflater li = getLayoutInflater();
         aList.add(li.inflate(R.layout.view_one,null,false));
         aList.add(li.inflate(R.layout.view_two,null,false));
-        aList.add(li.inflate(R.layout.view_three,null,false));
         mAdapter = new MyPagerAdapter(aList);
         viewpager_one.setAdapter(mAdapter);
     }
