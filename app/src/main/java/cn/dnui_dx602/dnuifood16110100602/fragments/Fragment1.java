@@ -28,7 +28,6 @@ import cn.dnui_dx602.dnuifood16110100602.adapter.ShopAdapter;
 
 public class Fragment1 extends Fragment {
     RecyclerView recyclerView;
-    // Inflate the layout for this fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,10 +44,8 @@ public class Fragment1 extends Fragment {
     }
     public void initData() {
 
-        List<ShopBean> mDataList;
         recyclerView=getActivity().findViewById(R.id.shop_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
        getData();
 
 

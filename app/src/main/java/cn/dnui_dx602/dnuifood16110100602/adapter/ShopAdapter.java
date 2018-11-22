@@ -84,7 +84,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            res_name= itemView.findViewById(R.id.comment_username);
+            res_name= itemView.findViewById(R.id.comment_foodname);
             res_bar= itemView.findViewById(R.id.ratingBar1);
             image=itemView.findViewById(R.id.res_image);
             res_address= itemView.findViewById(R.id.res_address);

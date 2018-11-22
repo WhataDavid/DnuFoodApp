@@ -108,7 +108,6 @@ public class GetFoodByShopActivity extends BaseActivity {
         String url = "http://172.24.10.175:8080/foodService/" + picString;
         Picasso.get().load(url).into(imageView);
 
-        List<FoodBean> mDataList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.setItemAnimator(new DefaultItemAnimator());
         getData();

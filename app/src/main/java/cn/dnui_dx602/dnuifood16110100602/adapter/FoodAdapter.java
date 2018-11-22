@@ -41,7 +41,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             return;
         ViewHolder viewHolder=(ViewHolder) holder;
         viewHolder.foodname.setText(entity.getFoodname());
-        System.out.println("FoodName====="+entity.getFoodname());
+        System.out.println("-------------------------Food------------------------"+"\n"+"FoodName====="+entity.getFoodname());
         System.out.println("Intro====="+entity.getIntro());
         System.out.println("Price====="+entity.getPrice());
         viewHolder.intro.setText(entity.getIntro());
@@ -66,6 +66,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                         editor.putString("pic",entity.getPic());
                         editor.putString("price",entity.getPrice());
                         editor.putString("level",entity.getRecommand());
+                        editor.putString("foodid",entity.getFood_id());
 
                         editor.commit();
 
