@@ -67,6 +67,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                         editor.putString("price",entity.getPrice());
                         editor.putString("level",entity.getRecommand());
                         editor.putString("foodid",entity.getFood_id());
+                        editor.putString("shopid",entity.getShop_id());
 
                         editor.commit();
 

@@ -108,7 +108,6 @@ public class MyPagerAdapter extends PagerAdapter {
                     BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                     String line;
                     while ((line = bufferedReader.readLine()) != null) {
-                        System.out.println(sharedPreferences.getString("foodid",""));
                         System.out.println("评论返回信息"+line );
                         commentsList = new Gson().fromJson(line, new TypeToken<List<CommentBean>>(){}.getType());
 //                        System.out.println();
