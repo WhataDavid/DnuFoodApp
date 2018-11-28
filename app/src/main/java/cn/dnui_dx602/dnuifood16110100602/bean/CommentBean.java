@@ -29,8 +29,8 @@ public class CommentBean {
     private int shop_id;
     private String foodname;
     private String shopname;
-    private int price;
-    private int num;
+    private double price;
+    private double num;
     private String  username;
     private String order_time;
     private int sum;
@@ -96,19 +96,19 @@ public class CommentBean {
         this.shopname = shopname;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public int getNum() {
+    public double getNum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setNum(double num) {
         this.num = num;
     }
 

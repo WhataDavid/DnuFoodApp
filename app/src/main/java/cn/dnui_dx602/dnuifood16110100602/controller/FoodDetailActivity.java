@@ -44,6 +44,7 @@ SharedPreferences sharedPreferences;
     String urlString;
     Gson gson;
     CollectBean collectBean;
+    Success success ;
     String Like=new String();
     @Override
     void initViews() {
@@ -63,15 +64,61 @@ SharedPreferences sharedPreferences;
             aSwitch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (aSwitch.isChecked())
-                    {
-                        aSwitch.setChecked(true);
-                        aSwitch.setText("已收藏");
-                    }
-                    else{
-                        aSwitch.setText("收藏");
-                        aSwitch.setChecked(false);
-                    }
+
+                    new AsyncTask<String, Void, Void>() {
+                        @Override
+                        protected void onPostExecute(Void aVoid) {
+                            super.onPostExecute(aVoid);
+                            if (aSwitch.isChecked()&&success.getSuccess().equals("1"))
+                            {
+                                aSwitch.setChecked(true);
+                                aSwitch.setText("已收藏");
+                            }
+                            else if (!aSwitch.isChecked()&&success.getSuccess().equals("1")){
+                                aSwitch.setText("收藏");
+                                aSwitch.setChecked(false);
+                            }
+
+
+                        }
+                        String line=new String();
+
+                        @Override
+                        protected Void doInBackground(String... strings) {
+                            try {
+                                URL url = new URL(strings[0]);
+                                URLConnection connection = url.openConnection();
+                                InputStream inputStream = connection.getInputStream();
+                                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+                                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                                while ((line = bufferedReader.readLine()) != null) {
+                                    System.out.println("收藏返回信息"+line );
+                                    gson = new Gson();
+                                    success = gson.fromJson(line, Success.class);
+                                    bufferedReader.close();
+                                    inputStreamReader.close();
+                                    inputStream.close();
+                                }
+
+                            } catch (MalformedURLException e) {
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute("http://172.24.10.175:8080/foodService/userCollectFood.do?user_id="+LoginActivity.user_id+"&food_id="+sharedPreferences.getString("foodid",""));
+
+
+//                    if (aSwitch.isChecked())
+//                    {
+//                        aSwitch.setChecked(true);
+//                        aSwitch.setText("已收藏");
+//                    }
+//                    else{
+//                        aSwitch.setText("收藏");
+//                        aSwitch.setChecked(false);
+//                    }
 
                 }
             });
@@ -118,7 +165,7 @@ SharedPreferences sharedPreferences;
                     while ((line = bufferedReader.readLine()) != null) {
                         System.out.println("---------------------Like-------------------"+sharedPreferences.getString("foodid",""));
                         System.out.println(sharedPreferences.getString("shopid",""));
-                        System.out.println("收藏返回信息"+line );
+                        System.out.println("收藏状态返回信息"+line );
                         gson = new Gson();
                         collectBean = gson.fromJson(line, CollectBean.class);
                         System.out.println("COLLECTED  BEAN  :::::"+collectBean.getCollected());
