@@ -2,14 +2,13 @@ package cn.dnui_dx602.dnuifood16110100602.fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.TabItem;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.design.widget.TabLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,16 +25,14 @@ import java.util.List;
 import cn.dnui_dx602.dnuifood16110100602.R;
 import cn.dnui_dx602.dnuifood16110100602.adapter.CollectFoodAdapter;
 import cn.dnui_dx602.dnuifood16110100602.adapter.CollectShopAdapter;
-import cn.dnui_dx602.dnuifood16110100602.adapter.ShopAdapter;
 import cn.dnui_dx602.dnuifood16110100602.bean.CollectionsBean;
-import cn.dnui_dx602.dnuifood16110100602.bean.ShopBean;
+import cn.dnui_dx602.dnuifood16110100602.controller.LoginActivity;
 
 
 public class Fragment2 extends Fragment {
     RecyclerView recyclerView;
-    TabItem tabItem1, tabItem2;
     TabLayout tabLayout;
-
+    TabLayout.Tab item1,item2;
     //    TabLayout.Tab tab = tablayout.getTabAt(0);
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,36 +45,47 @@ public class Fragment2 extends Fragment {
     public void onStart() {
 
         initData();
+        initEvent();
 
         super.onStart();
+    }
+
+    private void initEvent() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.equals(item1))
+                {
+                    getData("http://172.24.10.175:8080/foodService/getAllUserCollection.do?user_id="+ LoginActivity.user_id+"&flag=0", 1);
+                }
+                else
+                    getData("http://172.24.10.175:8080/foodService/getAllUserCollection.do?user_id="+LoginActivity.user_id+"&flag=1", 0);
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     public void initData() {
 
         recyclerView = getActivity().findViewById(R.id.collect_list);
-
         tabLayout = getActivity().findViewById(R.id.tabs);
-        tabItem1 = tabLayout.findViewById(R.id.tab1);
-        tabItem2 = tabLayout.findViewById(R.id.tab2);
-//        tableLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+         item1=tabLayout.getTabAt(0);
+         item2=tabLayout.getTabAt(1);
+        item1.setText("店铺");
+        item2.setText("菜品");
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-//        tabItem1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//        getData("http://172.24.10.175:8080/foodService/getAllUserCollection.do?user_id=15&flag=0", 1);
-//            }
-//        });
-//        tabItem2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-        getData("http://172.24.10.175:8080/foodService/getAllUserCollection.do?user_id=15&flag=1", 0);
-//            }
-//        });
+        getData("http://172.24.10.175:8080/foodService/getAllUserCollection.do?user_id=15&flag=0", 1);
 
 
     }

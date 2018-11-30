@@ -22,7 +22,7 @@ public class CommentBean {
      * comment_time : 2018-07-03
      */
 
-    private long order_id;
+    private String order_id;
     private int item_id;
     private int user_id;
     private int food_id;
@@ -33,18 +33,18 @@ public class CommentBean {
     private double num;
     private String  username;
     private String order_time;
-    private int sum;
+    private double sum;
     private String suggesttime;
     private String address;
     private int state;
     private String content;
     private String comment_time;
 
-    public long getOrder_id() {
+    public String getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(long order_id) {
+    public void setOrder_id(String order_id) {
         this.order_id = order_id;
     }
 
@@ -128,11 +128,11 @@ public class CommentBean {
         this.order_time = order_time;
     }
 
-    public int getSum() {
+    public double getSum() {
         return sum;
     }
 
-    public void setSum(int sum) {
+    public void setSum(double sum) {
         this.sum = sum;
     }
 

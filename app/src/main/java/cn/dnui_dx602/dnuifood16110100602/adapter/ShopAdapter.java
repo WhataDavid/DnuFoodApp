@@ -91,4 +91,12 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
             res_intro=itemView.findViewById(R.id.intro);
         }
     }
+    //  删除数据
+    public void removeData(int position) {
+        mDataList.remove(position);
+        //删除动画
+        notifyItemRemoved(position);
+        notifyDataSetChanged();
+    }
+
 }
