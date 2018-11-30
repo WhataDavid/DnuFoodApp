@@ -49,7 +49,7 @@ public class UpdateUserById extends BaseActivity {
         mobileString = intent.getStringExtra("mobile");
         addressString = intent.getStringExtra("address");
         username.setText(usernameString);
-        password.setText(passwordString);
+//        password.setText(passwordString);
         phone.setText(mobileString);
         address.setText(addressString);
         System.out.println(usernameString + "zzzz");
@@ -62,7 +62,8 @@ public class UpdateUserById extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (LoginActivity.user_pass.equals(originalPass.getText()))
+                Toast.makeText(UpdateUserById.this,LoginActivity.user_pass+"///"+originalPass.getText() , Toast.LENGTH_SHORT).show();
+                if (LoginActivity.user_pass.equals(originalPass.getText().toString()))
                 {
                     usernameString=username.getText().toString();
 //                passwordString=password.getText().toString();
