@@ -23,8 +23,12 @@ import cn.dnui_dx602.dnuifood16110100602.controller.GetFoodByShopActivity;
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
     private List<CommentBean> mDataList;
 
-    public CommentAdapter(List mDataList){
-        this.mDataList=mDataList;
+//    public CommentAdapter(List mDataList){
+//        this.mDataList=mDataList;
+//    }
+
+    public void setList(List<CommentBean> list){
+        mDataList = list;
     }
     @NonNull
     @Override
@@ -50,6 +54,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     @Override
     public int getItemCount() {
+        if (mDataList==null)
+            return 0;
+        else
         return mDataList.size();
     }
 

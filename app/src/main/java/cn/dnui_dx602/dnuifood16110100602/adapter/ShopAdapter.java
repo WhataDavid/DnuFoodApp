@@ -23,8 +23,12 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
     private List<ShopBean> mDataList;
     public static int Shopid;
 
-    public ShopAdapter(Context mContext,List mDataList){
-        this.mDataList=mDataList;
+    public ShopAdapter(Context mContext){
+        //this.mDataList=mDataList;
+    }
+
+    public void setList(List<ShopBean> list){
+        mDataList = list;
     }
     @NonNull
     @Override
@@ -73,6 +77,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
+        if(mDataList==null) return 0;
+        else
         return mDataList.size();
     }
 

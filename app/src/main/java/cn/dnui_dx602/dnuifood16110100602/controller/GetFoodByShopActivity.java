@@ -51,6 +51,8 @@ public class GetFoodByShopActivity extends BaseActivity {
     Success success;
     int flag = 0;
     public static MenuItem menuItem;
+    FoodAdapter foodAdapter;
+    List<FoodBean> foodsList;
 
     @Override
     void initViews() {
@@ -148,6 +150,8 @@ public class GetFoodByShopActivity extends BaseActivity {
 
     @Override
     void initDatas() {
+        foodAdapter=new FoodAdapter();
+
         sharedPreferences = getSharedPreferences("INFOR", Context.MODE_PRIVATE);
         shopnameString = sharedPreferences.getString("shopname", "");
         phonenumString = sharedPreferences.getString("phonenum", "");
@@ -165,6 +169,7 @@ public class GetFoodByShopActivity extends BaseActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(foodAdapter);
         getData();
     }
 
@@ -215,12 +220,14 @@ public class GetFoodByShopActivity extends BaseActivity {
     private void getData() {
         String string = "http://172.24.10.175:8080/foodService/getFoodByShop.do?shop_id=" + shopidString;
         new AsyncTask<String, Void, Void>() {
-            List<FoodBean> foodsList;
+//            List<FoodBean> foodsList;
             @Override
             protected void onPostExecute(Void aVoid) {
-                recyclerView.setAdapter(new FoodAdapter(foodsList));
+
                 super.onPostExecute(aVoid);
                 initLike();
+                foodAdapter.setList(foodsList);
+                foodAdapter.notifyDataSetChanged();
             }
             @Override
             protected Void doInBackground(String... strings) {
@@ -235,7 +242,7 @@ public class GetFoodByShopActivity extends BaseActivity {
                         System.out.println("菜单返回信息" + line);
                         foodsList = new Gson().fromJson(line, new TypeToken<List<FoodBean>>() {
                         }.getType());
-                        System.out.println(foodsList.get(0).toString());
+//                        System.out.println(foodsList.get(0).toString());
                         bufferedReader.close();
                         inputStreamReader.close();
                         inputStream.close();

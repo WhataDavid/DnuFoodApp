@@ -25,8 +25,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     private List<FoodBean> mDataList;
     public static int Foodid;
 
-    public FoodAdapter(List mDataList){
-        this.mDataList=mDataList;
+    public FoodAdapter(){
+//        this.mDataList=mDataList;
+    }
+    public void setList(List<FoodBean> list){
+        mDataList = list;
     }
     @NonNull
     @Override
@@ -79,6 +82,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
+        if (mDataList==null)
+            return 0;
+        else
         return mDataList.size();
     }
 

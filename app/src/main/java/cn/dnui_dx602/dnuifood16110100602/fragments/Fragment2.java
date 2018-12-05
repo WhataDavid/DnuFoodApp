@@ -25,6 +25,7 @@ import java.util.List;
 import cn.dnui_dx602.dnuifood16110100602.R;
 import cn.dnui_dx602.dnuifood16110100602.adapter.CollectFoodAdapter;
 import cn.dnui_dx602.dnuifood16110100602.adapter.CollectShopAdapter;
+import cn.dnui_dx602.dnuifood16110100602.adapter.ShopAdapter;
 import cn.dnui_dx602.dnuifood16110100602.bean.CollectionsBean;
 import cn.dnui_dx602.dnuifood16110100602.controller.LoginActivity;
 
@@ -33,6 +34,8 @@ public class Fragment2 extends Fragment {
     RecyclerView recyclerView;
     TabLayout tabLayout;
     TabLayout.Tab item1,item2;
+    CollectShopAdapter shopadapter;
+    CollectFoodAdapter foodadapter;
     //    TabLayout.Tab tab = tablayout.getTabAt(0);
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,7 +89,9 @@ public class Fragment2 extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         getData("http://172.24.10.175:8080/foodService/getAllUserCollection.do?user_id=15&flag=0", 1);
-
+        shopadapter = new CollectShopAdapter(getContext());
+        foodadapter = new CollectFoodAdapter(getContext());
+        recyclerView.setAdapter(shopadapter);
 
     }
 
@@ -98,9 +103,20 @@ public class Fragment2 extends Fragment {
             @Override
             protected void onPostExecute(Void aVoid) {
                 if (flag == 1)
-                    recyclerView.setAdapter(new CollectShopAdapter(getContext(), collectionsBeanList));
+                {
+                    recyclerView.setAdapter(shopadapter);
+                    shopadapter.setList(collectionsBeanList);
+                    shopadapter.notifyDataSetChanged();
+                }
+
+//                    recyclerView.setAdapter(new CollectShopAdapter(getContext(), collectionsBeanList));
                 else
-                    recyclerView.setAdapter(new CollectFoodAdapter(getContext(), collectionsBeanList));
+                {
+                    recyclerView.setAdapter(foodadapter);
+                    foodadapter.setList(collectionsBeanList);
+                    foodadapter.notifyDataSetChanged();
+
+                }
                 super.onPostExecute(aVoid);
             }
 

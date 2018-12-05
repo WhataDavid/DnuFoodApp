@@ -37,6 +37,8 @@ import cn.dnui_dx602.dnuifood16110100602.controller.LoginActivity;
 public class Fragment3 extends Fragment {
 RecyclerView recyclerView;
 SearchView searchView;
+FoodAdapter foodAdapter;
+    List<FoodBean> foodBeanList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,18 +84,20 @@ SearchView searchView;
         recyclerView = getActivity().findViewById(R.id.search_list);
         searchView=getActivity().findViewById(R.id.searchView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-
-
+        foodAdapter=new FoodAdapter();
+        recyclerView.setAdapter(foodAdapter);
     }
 
     private void getData(String url) {
 
         new AsyncTask<String, Void, Void>() {
-            List<FoodBean> foodBeanList;
+//            List<FoodBean> foodBeanList;
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                    recyclerView.setAdapter(new FoodAdapter( foodBeanList));
+//                    recyclerView.setAdapter(new FoodAdapter( foodBeanList));
+                foodAdapter.setList(foodBeanList);
+                foodAdapter.notifyDataSetChanged();
                 super.onPostExecute(aVoid);
             }
 

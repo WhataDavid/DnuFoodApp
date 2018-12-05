@@ -34,9 +34,12 @@ import cn.dnui_dx602.dnuifood16110100602.bean.ShopBean;
 public class MyPagerAdapter extends PagerAdapter {
     private ArrayList<View> viewLists;
     RecyclerView recyclerView;
+    CommentAdapter commentAdapter;
     public MyPagerAdapter(ArrayList<View> viewLists) {
         super();
         this.viewLists = viewLists;
+        commentAdapter=new CommentAdapter();
+
     }
 
     @Override
@@ -86,6 +89,7 @@ public class MyPagerAdapter extends PagerAdapter {
     private void Init_View_Two(ViewGroup container,SharedPreferences sharedPreferences) {
         recyclerView=container.findViewById(R.id.view_two_recyclerview);
         recyclerView.setLayoutManager(new GridLayoutManager(container.getContext(),2));
+        recyclerView.setAdapter(commentAdapter);
         getData(container,sharedPreferences);
     }
 
@@ -94,7 +98,9 @@ public class MyPagerAdapter extends PagerAdapter {
             List<CommentBean> commentsList;
             @Override
             protected void onPostExecute(Void aVoid) {
-                recyclerView.setAdapter(new CommentAdapter(commentsList));
+//                recyclerView.setAdapter(new CommentAdapter());
+                commentAdapter.setList(commentsList);
+                commentAdapter.notifyDataSetChanged();
                 super.onPostExecute(aVoid);
 
                 if (!commentsList.isEmpty())

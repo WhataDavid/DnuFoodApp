@@ -28,6 +28,7 @@ import cn.dnui_dx602.dnuifood16110100602.adapter.ShopAdapter;
 
 public class Fragment1 extends Fragment {
     RecyclerView recyclerView;
+    ShopAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +47,8 @@ public class Fragment1 extends Fragment {
 
         recyclerView=getActivity().findViewById(R.id.shop_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        adapter = new ShopAdapter(getContext());
+        recyclerView.setAdapter(adapter);
        getData();
 
 
@@ -57,7 +60,8 @@ public class Fragment1 extends Fragment {
             List<ShopBean> shopsList;
             @Override
             protected void onPostExecute(Void aVoid) {
-                recyclerView.setAdapter(new ShopAdapter(getContext(),shopsList));
+                adapter.setList(shopsList);
+                adapter.notifyDataSetChanged();
                 super.onPostExecute(aVoid);
             }
 

@@ -24,8 +24,12 @@ import cn.dnui_dx602.dnuifood16110100602.controller.GetFoodByShopActivity;
 public class CollectShopAdapter extends RecyclerView.Adapter<CollectShopAdapter.ViewHolder> {
     private List<CollectionsBean> mDataList;
 
-    public CollectShopAdapter(Context mContext, List mDataList){
-        this.mDataList=mDataList;
+    public CollectShopAdapter(Context mContext){
+
+//        this.mDataList=mDataList;
+    }
+    public void setList(List<CollectionsBean> list){
+        mDataList = list;
     }
     @NonNull
     @Override
@@ -47,7 +51,10 @@ public class CollectShopAdapter extends RecyclerView.Adapter<CollectShopAdapter.
 
     @Override
     public int getItemCount() {
-        return mDataList.size();
+//        return mDataList.size();
+        if(mDataList==null) return 0;
+        else
+            return mDataList.size();
     }
 
     public class ViewHolder extends  RecyclerView.ViewHolder{
