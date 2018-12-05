@@ -138,8 +138,8 @@ public class Fragment4 extends Fragment {
 //        update = getActivity().findViewById(R.id.update);
 
         System.out.println(getUserBean.getUser_id()+"8888");
-        userid.setText(getUserBean.getUser_id()+" ");
-        userName.setText(getUserBean.getUsername());
+        userid.setText("id:   "+getUserBean.getUser_id()+" ");
+        userName.setText("用户名:   "+getUserBean.getUsername());
         mobileNum.setText(getUserBean.getMobilenum());
         address.setText(getUserBean.getAddress());
 

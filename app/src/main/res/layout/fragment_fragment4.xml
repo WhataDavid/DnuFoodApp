@@ -4,7 +4,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#90bccd"
+    android:background="#D1EEEE"
     tools:context=".fragments.Fragment3">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,35 +13,44 @@
         android:id="@+id/constraintLayout"
         android:layout_width="396dp"
         android:layout_height="111dp"
-        android:background="@color/design_default_color_primary"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp">
+        android:background="#00C5CD"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="128dp"
-            android:layout_marginRight="128dp"
+            android:layout_width="143dp"
+            android:layout_height="37dp"
+            android:layout_marginLeft="156dp"
+            android:layout_marginStart="156dp"
             android:layout_marginTop="16dp"
             android:text="用户名"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/userid"
             android:layout_width="145dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="56dp"
-            android:layout_marginRight="56dp"
             android:layout_marginTop="16dp"
             android:text="id"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/username"
             app:layout_constraintTop_toBottomOf="@+id/username" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="111dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/q2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
     </android.support.constraint.ConstraintLayout>
 
     <TextView
@@ -114,6 +123,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:background="#80bdf9"
         android:text="修改"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

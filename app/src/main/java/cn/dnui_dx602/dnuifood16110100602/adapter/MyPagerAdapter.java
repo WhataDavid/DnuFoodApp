@@ -96,6 +96,14 @@ public class MyPagerAdapter extends PagerAdapter {
             protected void onPostExecute(Void aVoid) {
                 recyclerView.setAdapter(new CommentAdapter(commentsList));
                 super.onPostExecute(aVoid);
+
+                if (!commentsList.isEmpty())
+                {
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.putString("itemid",Integer.toString(commentsList.get(0).getItem_id()));
+                    editor.commit();
+                }
+
             }
 
             @Override

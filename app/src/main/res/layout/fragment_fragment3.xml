@@ -17,9 +17,12 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:isScrollContainer="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryBackground="@android:color/holo_orange_light"
+        app:queryHint="搜索菜品" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_list"

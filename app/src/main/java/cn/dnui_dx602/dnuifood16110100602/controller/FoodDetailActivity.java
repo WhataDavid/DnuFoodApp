@@ -4,15 +4,22 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,9 +40,9 @@ import cn.dnui_dx602.dnuifood16110100602.bean.Success;
 import cn.dnui_dx602.dnuifood16110100602.bean.UserBean;
 
 public class FoodDetailActivity extends BaseActivity {
-TextView textView,view_one_textview;
+EditText dialog_commemt;
 Switch aSwitch;
-String  strings;
+Button dialog_button;
 SharedPreferences sharedPreferences;
     private ViewPager viewpager_one;
     private ArrayList<View> aList;
@@ -46,13 +53,16 @@ SharedPreferences sharedPreferences;
     CollectBean collectBean;
     Success success ;
     String Like=new String();
+    Menu menu;
+    MenuItem menuItem;
+    LayoutInflater li;
     @Override
     void initViews() {
         setContentView(R.layout.activity_food_detail);
         viewpager_one = (ViewPager) findViewById(R.id.viewpager);
         aSwitch=findViewById(R.id.view_one_switch);
         aList = new ArrayList<View>();
-        LayoutInflater li = getLayoutInflater();
+        li = getLayoutInflater();
         aList.add(li.inflate(R.layout.view_one,null,false));
         aList.add(li.inflate(R.layout.view_two,null,false));
         mAdapter = new MyPagerAdapter(aList);
@@ -108,17 +118,6 @@ SharedPreferences sharedPreferences;
                             return null;
                         }
                     }.execute("http://172.24.10.175:8080/foodService/userCollectFood.do?user_id="+LoginActivity.user_id+"&food_id="+sharedPreferences.getString("foodid",""));
-
-
-//                    if (aSwitch.isChecked())
-//                    {
-//                        aSwitch.setChecked(true);
-//                        aSwitch.setText("已收藏");
-//                    }
-//                    else{
-//                        aSwitch.setText("收藏");
-//                        aSwitch.setChecked(false);
-//                    }
 
                 }
             });
@@ -194,5 +193,72 @@ SharedPreferences sharedPreferences;
         initViews();
         initDatas();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        this.menu = menu;
+        menuItem = menu.findItem(R.id.menu_collect);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(FoodDetailActivity.this);
+        final AlertDialog dialog = builder.create();
+        View dialogView = View.inflate(FoodDetailActivity.this, R.layout.dialog_addcomment, null);
+        //设置对话框布局
+        dialog.setView(dialogView);
+        dialog_commemt = dialogView.findViewById(R.id.dialog_commentEditText);
+        dialog_button = dialogView.findViewById(R.id.dialog_confirm);
+        dialog.show();
+        dialog_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AsyncTask<String, Void, Void>() {
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+                if (success.getSuccess().equals("1"))
+                {
+                    Toast.makeText(FoodDetailActivity.this, "成功", Toast.LENGTH_SHORT).show();
+                    viewpager_one.setAdapter(mAdapter);
+                    viewpager_one.setCurrentItem(1,true);
+                }
+                else
+                    Toast.makeText(FoodDetailActivity.this, "失败", Toast.LENGTH_SHORT).show();
+                    }
+                    String line = new String();
+                    @Override
+                    protected Void doInBackground(String... strings) {
+                        try {
+                            URL url = new URL(strings[0]);
+                            URLConnection connection = url.openConnection();
+                            InputStream inputStream = connection.getInputStream();
+                            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+                            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                            while ((line = bufferedReader.readLine()) != null) {
+                                System.out.println("添加评论返回信息" + line);
+                                gson = new Gson();
+                                success = gson.fromJson(line, Success.class);
+                                bufferedReader.close();
+                                inputStreamReader.close();
+                                inputStream.close();
+                            }
+                        } catch (MalformedURLException e) {
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                }.execute("http://172.24.10.175:8080/foodService/insertComment.do?item_id="+sharedPreferences.getString("itemid","")+"&content="+dialog_commemt.getText());
+            }
+        });
+
+
+
+        return super.onOptionsItemSelected(item);
     }
 }
