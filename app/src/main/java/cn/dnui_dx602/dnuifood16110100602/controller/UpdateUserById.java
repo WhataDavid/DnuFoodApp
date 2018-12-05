@@ -62,11 +62,11 @@ public class UpdateUserById extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(UpdateUserById.this,LoginActivity.user_pass+"///"+originalPass.getText() , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(UpdateUserById.this,LoginActivity.user_pass+"///"+originalPass.getText() , Toast.LENGTH_SHORT).show();
                 if (LoginActivity.user_pass.equals(originalPass.getText().toString()))
                 {
                     usernameString=username.getText().toString();
-//                passwordString=password.getText().toString();
+                passwordString=password.getText().toString();
                     mobileString=phone.getText().toString();
                     addressString=address.getText().toString();
                     LoginActivity.user_pass=passwordString;
