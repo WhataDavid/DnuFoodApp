@@ -7,12 +7,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.BaseInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.tandong.swichlayout.BaseAnimViewS;
+import com.tandong.swichlayout.BaseEffects;
+import com.tandong.swichlayout.SwitchLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,8 +33,7 @@ import cn.dnui_dx602.dnuifood16110100602.bean.UserBean;
 import cn.dnui_dx602.dnuifood16110100602.listener.onRetrofitListener;
 import cn.dnui_dx602.dnuifood16110100602.model.UserModel;
 
-public class  LoginActivity extends BaseActivity
-        implements onRetrofitListener<UserBean>, View.OnClickListener {
+public class  LoginActivity extends BaseActivity {
     private UserModel model;
     private Button btn_login,btn_regist;
     public EditText usernameEditText, userpassEditText;
@@ -46,12 +50,16 @@ public class  LoginActivity extends BaseActivity
         initEvents();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     void initViews() {
         layout_file = R.layout.activity_login;
         setLayout(layout_file);
-
+        SwitchLayout.RotateCenterIn(this,false,BaseEffects.getMoreQuickEffect());
         btn_regist=findViewById(R.id.btn_regist);
         btn_login = findViewById(R.id.btn_login);
         usernameEditText = findViewById(R.id.username);
@@ -61,11 +69,13 @@ public class  LoginActivity extends BaseActivity
 
     @Override
     void initEvents() {
-        btn_login.setOnClickListener(this);
+//        btn_login.setOnClickListener(this);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+//                BaseAnimViewS.animDuration = 2000;
+                SwitchLayout.get3DRotateFromLeft(btn_login,false,null);
                 usernameString = usernameEditText.getText().toString();
                 userpassString = userpassEditText.getText().toString();
                 user_pass=usernameString;
@@ -89,8 +99,8 @@ public class  LoginActivity extends BaseActivity
                             System.out.println(user_pass);
                             Intent intent = new Intent(LoginActivity.this, BottomNavActivity.class);
                             startActivity(intent);
-                            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//                            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+//                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         }
 
                     }
@@ -140,8 +150,9 @@ public class  LoginActivity extends BaseActivity
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
-                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                SwitchLayout.get3DRotateFromLeft(btn_regist,false,null);
+//                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }
@@ -151,19 +162,4 @@ public class  LoginActivity extends BaseActivity
 
     }
 
-    @Override
-    public void onSuccess(UserBean object) {
-        Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onFalure(String msg) {
-        Toast.makeText(LoginActivity.this, "Falut", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onClick(View view) {
-        model = new UserModel();
-        model.login("1", "1", this);
-    }
 }

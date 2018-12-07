@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tandong.swichlayout.SwitchLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,6 +47,7 @@ public class Fragment1 extends Fragment {
     public void initData() {
 
         recyclerView=getActivity().findViewById(R.id.shop_list);
+        SwitchLayout.RotateLeftCenterIn(recyclerView,false,null);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         adapter = new ShopAdapter(getContext());
         recyclerView.setAdapter(adapter);

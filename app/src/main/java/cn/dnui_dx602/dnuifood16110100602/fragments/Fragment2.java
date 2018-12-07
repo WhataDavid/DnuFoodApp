@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tandong.swichlayout.BaseEffects;
+import com.tandong.swichlayout.SwitchLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -81,6 +83,8 @@ public class Fragment2 extends Fragment {
     public void initData() {
 
         recyclerView = getActivity().findViewById(R.id.collect_list);
+        SwitchLayout.ScaleToBigHorizontalIn(recyclerView,false, BaseEffects.getMoreQuickEffect());
+
         tabLayout = getActivity().findViewById(R.id.tabs);
          item1=tabLayout.getTabAt(0);
          item2=tabLayout.getTabAt(1);

@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.tandong.swichlayout.BaseEffects;
+import com.tandong.swichlayout.SwitchLayout;
+
 import cn.dnui_dx602.dnuifood16110100602.R;
 import cn.dnui_dx602.dnuifood16110100602.fragments.Fragment1;
 import cn.dnui_dx602.dnuifood16110100602.fragments.Fragment2;
@@ -23,10 +26,13 @@ public class BottomNavActivity extends BaseActivity {
     @Override
     void initViews() {
         layout_file = R.layout.activity_bottom_nav;
+        SwitchLayout.animDuration = 1000;
+        SwitchLayout.ScaleToBigVerticalOut(this,false, BaseEffects.getMoreQuickEffect());
         setLayout(layout_file);
         setDefaultFragment();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
     }
 
     @Override

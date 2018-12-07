@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tandong.swichlayout.SwitchLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -82,7 +83,9 @@ FoodAdapter foodAdapter;
     public void initData() {
 
         recyclerView = getActivity().findViewById(R.id.search_list);
+        SwitchLayout.getFadingIn(recyclerView);
         searchView=getActivity().findViewById(R.id.searchView);
+        SwitchLayout.ScaleToBigVerticalIn(searchView,false,null);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         foodAdapter=new FoodAdapter();
         recyclerView.setAdapter(foodAdapter);

@@ -2,12 +2,16 @@ package cn.dnui_dx602.dnuifood16110100602.controller;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.tandong.swichlayout.BaseAnimViewS;
+import com.tandong.swichlayout.BaseEffects;
+import com.tandong.swichlayout.SwitchLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,6 +34,8 @@ public class RegisterActivity extends BaseActivity {
     @Override
     void initViews() {
         setContentView(R.layout.activity_regist2);
+        SwitchLayout.animDuration = 1000;
+        SwitchLayout.getSlideFromBottom(this,false, BaseEffects.getMoreQuickEffect());
         button=findViewById(R.id.button);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
@@ -37,6 +43,8 @@ public class RegisterActivity extends BaseActivity {
         add = findViewById(R.id.add);
         comment = findViewById(R.id.comment);
     }
+
+
 
     @Override
     void initEvents() {

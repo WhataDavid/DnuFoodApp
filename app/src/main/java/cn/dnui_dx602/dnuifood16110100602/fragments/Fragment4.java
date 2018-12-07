@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.tandong.swichlayout.SwitchLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class Fragment4 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        SwitchLayout.get3DRotateFromLeft(container,false,null);
         return inflater.inflate(R.layout.fragment_fragment4, container, false);
 
     }
@@ -62,6 +64,7 @@ public class Fragment4 extends Fragment {
             protected void onPreExecute() {
                 super.onPreExecute();
                 update = getActivity().findViewById(R.id.update);
+                SwitchLayout.getFadingIn(update);
             }
 
             @Override
@@ -118,6 +121,7 @@ public class Fragment4 extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SwitchLayout.getFadingOut(update,false);
                 Intent intent=new Intent(getActivity(),UpdateUserById.class);
                 intent.putExtra("username",getUserBean.getUsername());
                 intent.putExtra("userid",getUserBean.getUser_id());

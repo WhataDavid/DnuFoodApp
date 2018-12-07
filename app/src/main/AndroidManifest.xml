@@ -21,13 +21,13 @@
         </activity>
         <activity android:name=".controller.BaseActivity" />
         <activity android:name=".controller.RegisterActivity" />
-        <activity android:name=".controller.RegisterActivity" />
         <activity
             android:name=".controller.BottomNavActivity"
             android:label="@string/title_activity_bottom_nav" />
         <activity android:name=".controller.UpdateUserById" />
         <activity android:name=".controller.GetFoodByShopActivity" />
-        <activity android:name=".controller.FoodDetailActivity"></activity>
+        <activity android:name=".controller.FoodDetailActivity" />
+        <activity android:name=".controller.MyApplication"></activity>
     </application>
 
 </manifest>
