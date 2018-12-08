@@ -45,7 +45,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/comment_foodname"
+                        android:id="@+id/historyname"
                         android:layout_width="135dp"
                         android:layout_height="34dp"
                         android:layout_marginLeft="48dp"
@@ -68,9 +68,9 @@
                         android:gravity="center"
                         android:text="TextView"
                         android:textColor="@android:color/holo_orange_dark"
-                        app:layout_constraintEnd_toEndOf="@+id/comment_foodname"
-                        app:layout_constraintStart_toStartOf="@+id/comment_foodname"
-                        app:layout_constraintTop_toBottomOf="@+id/comment_foodname" />
+                        app:layout_constraintEnd_toEndOf="@+id/historyname"
+                        app:layout_constraintStart_toStartOf="@+id/historyname"
+                        app:layout_constraintTop_toBottomOf="@+id/historyname" />
 
                 </android.support.constraint.ConstraintLayout>
             </LinearLayout>

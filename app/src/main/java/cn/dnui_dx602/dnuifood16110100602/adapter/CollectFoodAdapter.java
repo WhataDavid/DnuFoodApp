@@ -59,7 +59,7 @@ public class CollectFoodAdapter extends RecyclerView.Adapter<CollectFoodAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            res_name= itemView.findViewById(R.id.comment_foodname);
+            res_name= itemView.findViewById(R.id.historyname);
             image=itemView.findViewById(R.id.res_image);
             res_address= itemView.findViewById(R.id.res_address);
         }

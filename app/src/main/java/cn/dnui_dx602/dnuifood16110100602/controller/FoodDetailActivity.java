@@ -225,6 +225,7 @@ SharedPreferences sharedPreferences;
                     Toast.makeText(FoodDetailActivity.this, "成功", Toast.LENGTH_SHORT).show();
                     viewpager_one.setAdapter(mAdapter);
                     viewpager_one.setCurrentItem(1,true);
+
                 }
                 else
                     Toast.makeText(FoodDetailActivity.this, "失败", Toast.LENGTH_SHORT).show();

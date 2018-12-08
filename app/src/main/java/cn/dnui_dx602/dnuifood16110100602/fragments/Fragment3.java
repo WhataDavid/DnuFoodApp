@@ -1,5 +1,9 @@
 package cn.dnui_dx602.dnuifood16110100602.fragments;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -10,6 +14,7 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,24 +27,34 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.LinkedList;
 import java.util.List;
 
 import cn.dnui_dx602.dnuifood16110100602.R;
 import cn.dnui_dx602.dnuifood16110100602.adapter.CollectFoodAdapter;
 import cn.dnui_dx602.dnuifood16110100602.adapter.CollectShopAdapter;
 import cn.dnui_dx602.dnuifood16110100602.adapter.FoodAdapter;
+import cn.dnui_dx602.dnuifood16110100602.adapter.HistoryAdapter;
 import cn.dnui_dx602.dnuifood16110100602.adapter.ShopAdapter;
 import cn.dnui_dx602.dnuifood16110100602.bean.CollectionsBean;
 import cn.dnui_dx602.dnuifood16110100602.bean.FoodBean;
+import cn.dnui_dx602.dnuifood16110100602.bean.HistoryBean;
 import cn.dnui_dx602.dnuifood16110100602.bean.ShopBean;
 import cn.dnui_dx602.dnuifood16110100602.controller.LoginActivity;
+import cn.dnui_dx602.dnuifood16110100602.database.Db;
 
 
 public class Fragment3 extends Fragment {
-RecyclerView recyclerView;
-SearchView searchView;
-FoodAdapter foodAdapter;
+    RecyclerView recyclerView;
+    SearchView searchView;
+    FoodAdapter foodAdapter;
     List<FoodBean> foodBeanList;
+    private List<HistoryBean> mData = null;
+    private HistoryAdapter mAdapter = null;
+    private ListView list_history;
+    ContentValues cv;
+    SQLiteDatabase dbWrite;
+    Db db;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,6 +64,10 @@ FoodAdapter foodAdapter;
 
     @Override
     public void onStart() {
+        db = new Db(getContext(), "history", null, 1);
+        dbWrite = db.getWritableDatabase();
+        dbWrite.close();
+
 
         initData();
         initEvent();
@@ -60,45 +79,100 @@ FoodAdapter foodAdapter;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                getData("http://172.24.10.175:8080/foodService/getFoodBySearch.do?search="+s);
+                getData("http://172.24.10.175:8080/foodService/getFoodBySearch.do?search=" + s);
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                dbWrite = db.getWritableDatabase();
+
+
+
+                cv.put("name", s);
+                dbWrite.insert("history", null, cv);
+                dbWrite.close();
+//                mAdapter = new HistoryAdapter((LinkedList<HistoryBean>) mData, getContext());
+//                list_history.setAdapter(mAdapter);
+//                initdb();
+//                mAdapter.setList(new LinkedList<HistoryBean>);
+                mData = new LinkedList<HistoryBean>();
+                initdb();
+//        mData.add(new HistoryBean("123456"));
+//        mData.add(new HistoryBean("7890"));
+
+//                mAdapter = new HistoryAdapter((LinkedList<HistoryBean>) mData, getContext());
+//                list_history.setAdapter(mAdapter);
+
+                mAdapter.setList((LinkedList<HistoryBean>) mData);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if (s!=null)
-                {
-                    getData("http://172.24.10.175:8080/foodService/getFoodBySearch.do?search="+s);
-                }
-                else
-                {
-                    for (int i=0;i<recyclerView.getChildCount();i++)
+                if (s != null) {
+                    getData("http://172.24.10.175:8080/foodService/getFoodBySearch.do?search=" + s);
+                } else {
+                    for (int i = 0; i < recyclerView.getChildCount(); i++)
                         recyclerView.getAdapter().notifyItemRemoved(i);
                 }
+                recyclerView.getAdapter().notifyDataSetChanged();
                 return false;
             }
+
+
         });
     }
 
     public void initData() {
-
         recyclerView = getActivity().findViewById(R.id.search_list);
         SwitchLayout.getFadingIn(recyclerView);
-        searchView=getActivity().findViewById(R.id.searchView);
-        SwitchLayout.ScaleToBigVerticalIn(searchView,false,null);
+        searchView = getActivity().findViewById(R.id.searchView);
+        SwitchLayout.ScaleToBigVerticalIn(searchView, false, null);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        foodAdapter=new FoodAdapter();
+        foodAdapter = new FoodAdapter();
         recyclerView.setAdapter(foodAdapter);
+
+        list_history=(ListView) getActivity().findViewById(R.id.history_list);
+        mData = new LinkedList<HistoryBean>();
+        initdb();
+//        mData.add(new HistoryBean("123456"));
+//        mData.add(new HistoryBean("7890"));
+        mAdapter = new HistoryAdapter((LinkedList<HistoryBean>) mData, getContext());
+        list_history.setAdapter(mAdapter);
+
     }
+
+    public void initdb() {
+
+
+
+        cv = new ContentValues();
+//        dbWrite.execSQL("delete from history");
+
+//        cv.put("name", "test");
+//        dbWrite.insert("history", null, cv);
+//        cv.put("name", "test2");
+//        dbWrite.insert("history", null, cv);
+//        cv.put("name", "test3");
+//        dbWrite.insert("history", null, cv);
+//        cv.put("name", "test4");
+//        dbWrite.insert("history", null, cv);
+
+        SQLiteDatabase dbRead = db.getReadableDatabase();
+        Cursor c = dbRead.query(true,"history",new String[]{"name"}, null, null, null, null, null, null);
+        while (c.moveToNext()) {
+            String name = c.getString(c.getColumnIndex("name"));
+            mData.add(new HistoryBean(name));
+            System.out.println("！！！！！！！！！！！！！！！！！！！！！" + name);
+        }
+
+
+    }
+
 
     private void getData(String url) {
 
         new AsyncTask<String, Void, Void>() {
-//            List<FoodBean> foodBeanList;
 
             @Override
             protected void onPostExecute(Void aVoid) {
-//                    recyclerView.setAdapter(new FoodAdapter( foodBeanList));
                 foodAdapter.setList(foodBeanList);
                 foodAdapter.notifyDataSetChanged();
                 super.onPostExecute(aVoid);
