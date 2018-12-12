@@ -1,21 +1,17 @@
 package cn.dnui_dx602.dnuifood16110100602.controller;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.animation.BaseInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.tandong.swichlayout.BaseAnimViewS;
 import com.tandong.swichlayout.BaseEffects;
 import com.tandong.swichlayout.SwitchLayout;
 
@@ -23,14 +19,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
 import cn.dnui_dx602.dnuifood16110100602.R;
 import cn.dnui_dx602.dnuifood16110100602.bean.UserBean;
-import cn.dnui_dx602.dnuifood16110100602.listener.onRetrofitListener;
 import cn.dnui_dx602.dnuifood16110100602.model.UserModel;
 
 public class  LoginActivity extends BaseActivity {

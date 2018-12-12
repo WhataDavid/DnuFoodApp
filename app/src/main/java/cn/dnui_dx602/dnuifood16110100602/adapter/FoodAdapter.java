@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -17,9 +16,7 @@ import java.util.List;
 
 import cn.dnui_dx602.dnuifood16110100602.R;
 import cn.dnui_dx602.dnuifood16110100602.bean.FoodBean;
-import cn.dnui_dx602.dnuifood16110100602.bean.ShopBean;
 import cn.dnui_dx602.dnuifood16110100602.controller.FoodDetailActivity;
-import cn.dnui_dx602.dnuifood16110100602.controller.GetFoodByShopActivity;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     private List<FoodBean> mDataList;

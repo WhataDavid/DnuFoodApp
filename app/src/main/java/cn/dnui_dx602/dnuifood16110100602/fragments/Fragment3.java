@@ -1,12 +1,10 @@
 package cn.dnui_dx602.dnuifood16110100602.fragments;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,16 +29,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cn.dnui_dx602.dnuifood16110100602.R;
-import cn.dnui_dx602.dnuifood16110100602.adapter.CollectFoodAdapter;
-import cn.dnui_dx602.dnuifood16110100602.adapter.CollectShopAdapter;
 import cn.dnui_dx602.dnuifood16110100602.adapter.FoodAdapter;
 import cn.dnui_dx602.dnuifood16110100602.adapter.HistoryAdapter;
-import cn.dnui_dx602.dnuifood16110100602.adapter.ShopAdapter;
-import cn.dnui_dx602.dnuifood16110100602.bean.CollectionsBean;
 import cn.dnui_dx602.dnuifood16110100602.bean.FoodBean;
 import cn.dnui_dx602.dnuifood16110100602.bean.HistoryBean;
-import cn.dnui_dx602.dnuifood16110100602.bean.ShopBean;
-import cn.dnui_dx602.dnuifood16110100602.controller.LoginActivity;
 import cn.dnui_dx602.dnuifood16110100602.database.Db;
 
 

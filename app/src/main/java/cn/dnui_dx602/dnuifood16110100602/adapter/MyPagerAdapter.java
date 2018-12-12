@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ import java.util.List;
 
 import cn.dnui_dx602.dnuifood16110100602.R;
 import cn.dnui_dx602.dnuifood16110100602.bean.CommentBean;
-import cn.dnui_dx602.dnuifood16110100602.bean.ShopBean;
 
 public class MyPagerAdapter extends PagerAdapter {
     private ArrayList<View> viewLists;
@@ -109,6 +107,7 @@ public class MyPagerAdapter extends PagerAdapter {
                     editor.putString("itemid",Integer.toString(commentsList.get(0).getItem_id()));
                     editor.commit();
                 }
+
 
             }
 

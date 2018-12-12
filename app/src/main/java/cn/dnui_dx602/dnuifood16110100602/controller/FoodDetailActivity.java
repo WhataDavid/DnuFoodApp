@@ -3,10 +3,9 @@ package cn.dnui_dx602.dnuifood16110100602.controller;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,12 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,15 +25,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.List;
 
 import cn.dnui_dx602.dnuifood16110100602.R;
-import cn.dnui_dx602.dnuifood16110100602.adapter.CommentAdapter;
 import cn.dnui_dx602.dnuifood16110100602.adapter.MyPagerAdapter;
 import cn.dnui_dx602.dnuifood16110100602.bean.CollectBean;
-import cn.dnui_dx602.dnuifood16110100602.bean.CommentBean;
 import cn.dnui_dx602.dnuifood16110100602.bean.Success;
-import cn.dnui_dx602.dnuifood16110100602.bean.UserBean;
 
 public class FoodDetailActivity extends BaseActivity {
 EditText dialog_commemt;

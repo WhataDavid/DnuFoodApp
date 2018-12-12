@@ -1,22 +1,18 @@
 package cn.dnui_dx602.dnuifood16110100602.controller;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -50,9 +46,8 @@ public class GetFoodByShopActivity extends BaseActivity {
     String Like, urlString;
     Success success;
     int flag = 0;
-    public static MenuItem menuItem;
     FoodAdapter foodAdapter;
-    List<FoodBean> foodsList;
+    public static MenuItem menuItem;
 
     @Override
     void initViews() {
@@ -150,8 +145,6 @@ public class GetFoodByShopActivity extends BaseActivity {
 
     @Override
     void initDatas() {
-        foodAdapter=new FoodAdapter();
-
         sharedPreferences = getSharedPreferences("INFOR", Context.MODE_PRIVATE);
         shopnameString = sharedPreferences.getString("shopname", "");
         phonenumString = sharedPreferences.getString("phonenum", "");
@@ -166,10 +159,10 @@ public class GetFoodByShopActivity extends BaseActivity {
 //        intro.setText(introString);
         String url = "http://172.24.10.175:8080/foodService/" + picString;
         Picasso.get().load(url).into(imageView);
-
+        foodAdapter=new FoodAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(foodAdapter);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
         getData();
     }
 
@@ -220,14 +213,13 @@ public class GetFoodByShopActivity extends BaseActivity {
     private void getData() {
         String string = "http://172.24.10.175:8080/foodService/getFoodByShop.do?shop_id=" + shopidString;
         new AsyncTask<String, Void, Void>() {
-//            List<FoodBean> foodsList;
+            List<FoodBean> foodsList;
             @Override
             protected void onPostExecute(Void aVoid) {
 
                 super.onPostExecute(aVoid);
-                initLike();
                 foodAdapter.setList(foodsList);
-                foodAdapter.notifyDataSetChanged();
+                initLike();
             }
             @Override
             protected Void doInBackground(String... strings) {
@@ -242,7 +234,8 @@ public class GetFoodByShopActivity extends BaseActivity {
                         System.out.println("菜单返回信息" + line);
                         foodsList = new Gson().fromJson(line, new TypeToken<List<FoodBean>>() {
                         }.getType());
-//                        System.out.println(foodsList.get(0).toString());
+                        System.out.println(foodsList.get(0).toString());
+//                        System.out.println(foodsList);
                         bufferedReader.close();
                         inputStreamReader.close();
                         inputStream.close();

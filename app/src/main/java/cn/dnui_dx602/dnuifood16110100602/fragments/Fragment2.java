@@ -27,7 +27,6 @@ import java.util.List;
 import cn.dnui_dx602.dnuifood16110100602.R;
 import cn.dnui_dx602.dnuifood16110100602.adapter.CollectFoodAdapter;
 import cn.dnui_dx602.dnuifood16110100602.adapter.CollectShopAdapter;
-import cn.dnui_dx602.dnuifood16110100602.adapter.ShopAdapter;
 import cn.dnui_dx602.dnuifood16110100602.bean.CollectionsBean;
 import cn.dnui_dx602.dnuifood16110100602.controller.LoginActivity;
 

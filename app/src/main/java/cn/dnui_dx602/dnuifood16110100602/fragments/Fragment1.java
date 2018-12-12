@@ -23,8 +23,8 @@ import java.net.URLConnection;
 import java.util.List;
 
 import cn.dnui_dx602.dnuifood16110100602.R;
-import cn.dnui_dx602.dnuifood16110100602.bean.ShopBean;
 import cn.dnui_dx602.dnuifood16110100602.adapter.ShopAdapter;
+import cn.dnui_dx602.dnuifood16110100602.bean.ShopBean;
 
 
 public class Fragment1 extends Fragment {

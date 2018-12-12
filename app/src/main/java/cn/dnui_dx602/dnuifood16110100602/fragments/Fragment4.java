@@ -38,6 +38,7 @@ public class Fragment4 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         SwitchLayout.get3DRotateFromLeft(container,false,null);
+
         return inflater.inflate(R.layout.fragment_fragment4, container, false);
 
     }
